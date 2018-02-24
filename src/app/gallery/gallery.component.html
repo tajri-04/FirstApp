@@ -6,8 +6,8 @@
       <form #f="ngForm" (submit)="onSearch(f.value)">
         <div class="form-group">
           <label class="">Mot Clé</label>
-          <input type="text" name="motCle" ngModel required [ngModel]="motCle">
-          <button type="submit" class="btn btn-primary">Chercher</button>
+          <input type="text" name="motCle" ngModel required [(ngModel)]="motCle">
+          <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Chercher</button>
         </div>
       </form>
 

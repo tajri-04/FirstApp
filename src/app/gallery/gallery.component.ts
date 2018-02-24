@@ -12,31 +12,24 @@ export class GalleryComponent implements OnInit {
 
   pagePhotos : any;
   currentPage:number = 1;
-  size:number=5;
+  size:number=10;
   totalPages:number;
   motCle:string ="";
+  currentMotCle:string ="";
   pages:Array<number>=[];
   constructor(private galleryService:GalleryService) {
 
   }
 
   ngOnInit() {
-    this.galleryService.search("rabat",this.size,this.currentPage)
-      .subscribe( data =>{
-        this.pagePhotos = data;
-        this.totalPages = data.totalHits/this.size;
-        if(data.totalHits % this.size !=0) ++this.totalPages;
-        this.pages = new Array(this.totalPages);
-      },err =>{
-        console.log(err);
-      })
   }
   onSearch(dataForm){
       this.galleryService.search(dataForm.motCle,this.size,this.currentPage)
       .subscribe( data =>{
+        this.currentMotCle = dataForm.motCle;
+        this.motCle = "";
         this.pagePhotos = data;
-        this.totalPages = data.totalHits/this.size;
-        if(data.totalHits % this.size !=0) ++this.totalPages;
+        this.totalPages = Math.ceil(data.totalHits/this.size);
         this.pages = new Array(this.totalPages);
     },err =>{
         console.log(err);
@@ -46,7 +39,7 @@ export class GalleryComponent implements OnInit {
 
   goToPage(i){
     this.currentPage=i+1;
-    this.onSearch({motCle:this.motCle});
+    this.onSearch({motCle:this.currentMotCle});
   }
 
 }
