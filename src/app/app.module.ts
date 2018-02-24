@@ -12,6 +12,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import {HttpModule} from "@angular/http";
 import {GalleryService} from "../services/gellery.service";
 import { ExmpleComponent } from './exmple/exmple.component';
+import {StreamService} from "../services/stream.service";
 
 const routes:Routes =[
   {path : 'about' , component:AboutComponent},
@@ -31,7 +32,7 @@ const routes:Routes =[
   imports: [
     BrowserModule , FormsModule , RouterModule.forRoot(routes) ,HttpModule
   ],
-  providers: [AboutService,GalleryService],
+  providers: [AboutService,GalleryService,StreamService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
